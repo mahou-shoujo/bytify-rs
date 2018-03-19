@@ -1,0 +1,22 @@
+[package]
+name = "bytify"
+description = "Convenience macro for generating continuous byte arrays from arbitrary sequences of literals."
+version = "0.0.1"
+authors = ["Eugene <mahou@shoujo.pw>"]
+license = "MIT"
+repository = "https://github.com/mahou-shoujo/bytify-rs.git"
+homepage = "https://github.com/mahou-shoujo/bytify-rs.git"
+readme = "README.md"
+categories = ["development-tools::procedural-macro-helpers", "encoding"]
+keywords = ["bytification", "literals", "hex", "proc-macro"]
+
+[dependencies]
+proc-macro-hack = "~0.4"
+bytify-impl = { version = "0.0.1", path = "./bytify-impl" }
+
+[dev-dependencies]
+byteorder = "~1.2"
+
+[features]
+default = []
+default-big-endian = [ "bytify-impl/default-big-endian" ]
