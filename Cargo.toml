@@ -12,7 +12,7 @@ keywords = ["bytification", "literals", "hex", "proc-macro"]
 
 [dependencies]
 proc-macro-hack = "~0.4"
-bytify-impl = "=0.0.1"
+bytify-impl = { path = "./bytify-impl/", version = "=0.0.1" }
 
 [dev-dependencies]
 byteorder = "~1.2"
