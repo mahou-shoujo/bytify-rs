@@ -1,7 +1,7 @@
 [package]
 name = "bytify-impl"
 description = "Internal implementation of the bytify crate."
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Eugene <mahou@shoujo.pw>"]
 license = "MIT"
 repository = "https://github.com/mahou-shoujo/bytify-rs.git"

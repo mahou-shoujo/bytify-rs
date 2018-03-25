@@ -89,3 +89,12 @@ proc_macro_expr_decl! {
     /// ```
     bytify! => bytify_inner
 }
+
+/// The same macro as [`bytify`] but returns a slice, instead of array.
+///
+/// [`bytify`]: macro.bytify.html
+#[macro_export]
+macro_rules! bytify_ref {
+    ($($items:expr ),*) => (&bytify!($($items),*)[..]);
+    ($($items:expr,) *) => (&bytify!($($items),*)[..]);
+}
