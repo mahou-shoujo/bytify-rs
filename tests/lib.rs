@@ -242,6 +242,21 @@ fn i8_suffixed() {
 }
 
 #[test]
+fn integer_endianness_ascription() {
+    assert_bytify_eq!(
+        bytify!(
+              30: le, 0xFACE: le, 0xDEADBEAF: le, -32768i32: le,
+              30: be, 0xFACE: be, 0xDEADBEAF: be, -32768i32: be,
+        ),
+        [
+            U8(0x1E), U8(0xCE), U8(0xFA), U8(0xAF), U8(0xBE), U8(0xAD), U8(0xDE), U8(0x00), U8(0x80), U8(0xFF), U8(0xFF),
+            U8(0x1E), U8(0xFA), U8(0xCE), U8(0xDE), U8(0xAD), U8(0xBE), U8(0xAF), U8(0xFF), U8(0xFF), U8(0x80), U8(0x00),
+
+        ]
+    );
+}
+
+#[test]
 fn char() {
     assert_bytify_eq!(
         bytify!(
