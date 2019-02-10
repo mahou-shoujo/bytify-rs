@@ -17,7 +17,7 @@ proc-macro-hack = "0.5"
 bytify-impl = { path = "./bytify-impl/", version = "=0.2.0" }
 
 [dev-dependencies]
-byteorder = "1.2"
+byteorder = "1"
 
 [features]
 default = []

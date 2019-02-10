@@ -14,7 +14,7 @@ keywords = ["bytification", "literals", "hex", "proc-macro"]
 proc-macro = true
 
 [dependencies]
-byteorder       = "1.2"
+byteorder       = "1"
 quote           = "0.6"
 syn             = { version = "0.15", features = ["full", "extra-traits"] }
 failure         = "0.1"
