@@ -18,8 +18,7 @@ List of supported literals:
 ### Examples
 
 ```
-#[macro_use]
-extern crate bytify;
+use bytify::bytify;
 
 fn main() {
     assert_eq!(&bytify!(
@@ -37,4 +36,4 @@ fn main() {
 ```
 ### Notes
 
-While `proc_macro2` is on its way to stabilization, [`proc-macro-hack`](https://crates.io/crates/proc-macro-hack) is used instead to bring this macro to stable Rust. 
+While `proc_macro2` is on its way to stabilization, [`proc-macro-hack`](https://crates.io/crates/proc-macro-hack) is used instead to bring this macro to stable Rust.
