@@ -1,5 +1,4 @@
 extern crate proc_macro;
-extern crate proc_macro_hack;
 
 use std::io::{Error as IOError};
 use byteorder::{ByteOrder, WriteBytesExt, BE, LE};

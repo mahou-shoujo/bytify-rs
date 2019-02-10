@@ -19,8 +19,7 @@
 //! # Examples
 //!
 //! ```
-//! #[macro_use]
-//! extern crate bytify;
+//! use bytify::bytify;
 //!
 //! fn main() {
 //!     assert_eq!(&bytify!(
@@ -37,11 +36,7 @@
 //! }
 //! ```
 
-extern crate proc_macro_hack;
-
 use proc_macro_hack::proc_macro_hack;
-
-extern crate bytify_impl;
 
 /// Converts a sequence of arbitrary literal values into a single byte array at the compile time.
 ///
@@ -64,8 +59,7 @@ extern crate bytify_impl;
 /// # Examples
 ///
 /// ```
-/// #[macro_use]
-/// extern crate bytify;
+/// use bytify::bytify;
 ///
 /// fn main() {
 ///     assert_eq!(&bytify!(

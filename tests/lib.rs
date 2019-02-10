@@ -1,11 +1,8 @@
 #![cfg_attr(feature = "cargo-clippy", allow(explicit_iter_loop, unreadable_literal))]
 
-#[macro_use]
-extern crate bytify;
-extern crate byteorder;
-
 use std::io::Cursor;
 use byteorder::{ReadBytesExt, LE};
+use bytify::bytify;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Expected {
