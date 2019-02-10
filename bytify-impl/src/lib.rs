@@ -1,13 +1,9 @@
-extern crate byteorder;
-#[macro_use]
-extern crate failure;
-extern crate quote;
-extern crate syn;
 extern crate proc_macro;
 extern crate proc_macro_hack;
 
 use std::io::{Error as IOError};
 use byteorder::{ByteOrder, WriteBytesExt, BE, LE};
+use failure::Fail;
 use quote::{ToTokens, quote};
 use proc_macro::TokenStream;
 use proc_macro_hack::proc_macro_hack;
