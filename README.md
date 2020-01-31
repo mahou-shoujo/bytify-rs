@@ -1,5 +1,5 @@
 ## Bytification for Rust
-[![](https://travis-ci.org/mahou-shoujo/bytify-rs.svg)](https://travis-ci.org/mahou-shoujo/bytify-rs)
+[![Build Status](https://travis-ci.com/mahou-shoujo/bytify-rs.svg?branch=master)](https://travis-ci.com/mahou-shoujo/bytify-rs)
 
 This little macro is able to perform some trivial conversions over arbitrary sequences of literal values, generating a continuous byte array at the compile time.
 
