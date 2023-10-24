@@ -55,7 +55,7 @@ fn decl() {
     assert_eq!(HELLO_WORLD, *b"Hello World");
 
     bytify_le!(static VERSION: "v", env!("CARGO_PKG_VERSION"));
-    assert_eq!(VERSION, *b"v0.4.0");
+    assert_eq!(VERSION, *b"v0.4.1");
 }
 
 #[test]
