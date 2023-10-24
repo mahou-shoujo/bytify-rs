@@ -1,39 +1,54 @@
-## Bytification for Rust
-[![Build Status](https://travis-ci.com/mahou-shoujo/bytify-rs.svg?branch=master)](https://travis-ci.com/mahou-shoujo/bytify-rs)
+## Bytification utilities
+[![Build Status](https://github.com/mahou-shoujo/bytify-rs/actions/workflows/rust.yml/badge.svg)](https://github.com/mahou-shoujo/bytify-rs/actions/workflows/rust.yml)
 
-This little macro is able to perform some trivial conversions over arbitrary sequences of literal values, generating a continuous byte array at the compile time.
+This crate provides a simple macro that can take multiple const-expr values as an input and
+merge them all together into a continuous byte array at compile-time.
+Supports all primitive types and is #[no_std] compatible.
 
-List of supported literals:
-
-* UTF-8 characters (`'?'`) as well as UTF-8 strings (`"こんにちは世界"`).
-* Integers, also negative and size-suffixed (`-99u32`).
-    * Non-suffixed numbers are written in a form as small as possible.
-    * The little endian is used as a default endianness but could be changed build-wise by enabling `default-big-endian` feature.
-    * It is possible to set endianness for a single literal using the "ascription" syntax, e.g. `9000: LE` or `0x8u32: be`.
-* IEEE 754 floating point numbers, also negative and size-suffixed (`-3.1415926f64`).
-    * Non-suffixed numbers are written in a form as small as possible.
-    * The little endian is used as a default endianness but could be changed build-wise by enabling `default-big-endian` feature.
-    * It is possible to set endianness for a single literal using the "ascription" syntax, e.g. `0.22: LE` or `-10f64: be`.
-
-### Examples
-
-```
+```rust
 use bytify::bytify;
 
-fn main() {
-    assert_eq!(&bytify!(
-        "The 🎂 is a lie!",
-        2948509150, -559038801: BE,
-        0.36658e+8, -2583.1f64: le,
-    )[..], &[
-        b'T', b'h', b'e', b' ',
-        0xF0, 0x9F, 0x8E, 0x82,
-        b' ', b'i', b's', b' ', b'a', b' ', b'l', b'i', b'e', b'!',
-        0xDE, 0xAD, 0xBE, 0xAF, 0xDE, 0xAD, 0xBE, 0xAF,
-        0xD4, 0xD6, 0x0B, 0x4C, 0x33, 0x33, 0x33, 0x33, 0x33, 0x2e, 0xa4, 0xc0,
-    ][..]);
-}
-```
-### Notes
+const CAKE: char = '🎂';
 
-While `proc_macro2` is on its way to stabilization, [`proc-macro-hack`](https://crates.io/crates/proc-macro-hack) is used instead to bring this macro to stable Rust.
+assert_eq!(bytify!("The ", CAKE, " is a lie!"), [
+    b'T', b'h', b'e',
+    b' ',
+    0xF0, 0x9F, 0x8E, 0x82,
+    b' ',
+    b'i', b's',
+    b' ',
+    b'a',
+    b' ',
+    b'l', b'i', b'e',
+    b'!',
+]);
+```
+
+### Supported types
+
+All primitive types (as literals or any other const-expr values) as well as `[u8; N]` and `&[u8]` values.
+
+* Unsuffixed numbers are inferred to be `i32` for integers and `f64` for floats.
+* `bool` values are cast to `u8`.
+* UTF-8 encoding is used to write `str` and `char` values.
+
+### Endianness
+
+`bytify!` always writes data using current target's native endianness.
+To switch to little/big endianness use `bytify_le!` or `bytify_be!` respectively.
+
+```rust
+use bytify::{bytify_be, bytify_le};
+
+assert_eq!(bytify_le!(1), [0x01, 0x00, 0x00, 0x00]);
+assert_eq!(bytify_be!(1), [0x00, 0x00, 0x00, 0x01]);
+```
+
+### Constants and statics
+
+```rust
+use bytify::bytify;
+
+bytify!(const NO_EVIL: '🙈', '🙉', '🙊');
+assert_eq!(NO_EVIL, [0xF0, 0x9F, 0x99, 0x88, 0xF0, 0x9F, 0x99, 0x89, 0xF0, 0x9F, 0x99, 0x8A]);
+```
