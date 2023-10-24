@@ -1,15 +1,15 @@
 [package]
 name = "bytify"
-description = "Convenience macro for generating continuous byte arrays from arbitrary sequences of literals."
+description = "A simple macro that can write given const-expr values into a continuous byte array."
 edition = "2021"
-version = "0.4.0"
+version = "0.4.1"
 authors = ["Eugene Palmoff <mahou@shoujo.pw>"]
 license = "MIT"
 repository = "https://github.com/mahou-shoujo/bytify-rs.git"
 homepage = "https://github.com/mahou-shoujo/bytify-rs.git"
 readme = "README.md"
-categories = ["development-tools::procedural-macro-helpers", "encoding"]
-keywords = ["bytification", "literals", "hex", "proc-macro"]
+categories = ["encoding", "no-std", "rust-patterns"]
+keywords = ["bytification", "macro"]
 
 [dependencies]
 typewit = "1"
